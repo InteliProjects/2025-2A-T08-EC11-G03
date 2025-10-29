@@ -1,0 +1,55 @@
+[project]
+name = "animal-data-api"
+version = "0.1.0"
+description = "FastAPI application for animal telemetry data with InfluxDB backend and Jupyter notebooks"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.116.1",
+    "influxdb-client>=1.49.0",
+    "ipykernel>=6.30.1",
+    "jupyter>=1.1.1",
+    "pandas>=2.3.2",
+    "uvicorn>=0.35.0",
+    "prisma>=0.13.1",
+    "aiohttp>=3.9.0",
+    "python-jose[cryptography]>=3.3.0",
+    "aiocsv>=1.3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.5.0",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py312']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+# pyproject is inside src/, so treat src/ as the package root
+package-dir = { "" = "." }
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]            # only package your FastAPI app (e.g., app, app.api, etc.)
+exclude = ["prisma*", "notebooks*"]   # ignore prisma generated code & notebooks

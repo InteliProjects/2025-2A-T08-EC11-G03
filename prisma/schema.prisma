@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-py"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Keep your AnimalMetadata model if you still want it
+model AnimalMetadata {
+  id            Int      @id @default(autoincrement())
+  device_id     String   @unique
+  // ... other fields
+  @@map("animal_metadata")
+}
+
+
+// --- ADD THIS NEW MODEL ---
+model CollarStatus {
+  id         Int      @id @default(autoincrement())
+  coleira_id String   @unique
+  prediction     String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("collar_statuses")
+}
