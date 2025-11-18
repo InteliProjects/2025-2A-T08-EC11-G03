@@ -50,7 +50,7 @@ Thumbs.db
 
 # Data files (you might want to keep some of these)
 *.csv
-*.json
+package-lock.json
 *.xlsx
 *.xls
 
